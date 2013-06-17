@@ -6,6 +6,8 @@ require 'machinist/active_record/lathe'
 module ActiveRecord #:nodoc:
   class Base #:nodoc:
     extend Machinist::Machinable
+    extend Machinist::ActiveRecord::Machinable
+
 
     def self.blueprint_class
       Machinist::ActiveRecord::Blueprint
