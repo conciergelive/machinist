@@ -11,7 +11,6 @@ module Machinist::ActiveRecord
       end
 
       # save the associations if we are doing a hard make!
-      binding.pry if value.is_a?(Venue)
       if Thread.current["machinist_hard_save"] && value.is_a?(ActiveRecord::Base)
         value.save!
       end
