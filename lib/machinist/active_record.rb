@@ -2,6 +2,7 @@ require 'active_record'
 require 'machinist'
 require 'machinist/active_record/blueprint'
 require 'machinist/active_record/lathe'
+require 'machinist/active_record/machinable'
 
 module ActiveRecord #:nodoc:
   class Base #:nodoc:
