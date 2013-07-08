@@ -3,7 +3,7 @@ module Machinist::ActiveRecord
   class Lathe < Machinist::Lathe
 
     def make_one_value(attribute, args) #:nodoc:
-      value = if is_association?(attribute) && !object.send(attribute).nil?
+      value = if is_association?(attribute) && !object.send(attribute).blank?
         object.send(attribute)
       elsif block_given?
         raise_argument_error(attribute) unless args.empty?
