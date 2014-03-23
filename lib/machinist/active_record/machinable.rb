@@ -1,5 +1,11 @@
 module Machinist::ActiveRecord
   module Machinable
+    def self.included(klass)
+      klass.class_eval do
+        define_callbacks :after_make
+      end
+    end
+
     def make(*args)
       super(*process_make_args(*args))
     end
