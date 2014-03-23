@@ -13,7 +13,9 @@ module Machinist
       @assigned_attributes = {}
 
       @object              = @klass.new
-      attributes.each {|key, value| assign_attribute(key, value) }
+      attributes = attributes.clone.symbolize_keys!
+      attributes.select { |k,v| klass.priority_attribute?(k) }.each { |k,v| assign_attribute(key, attributes.delete(key)) }
+      attributes.each { |key, value| assign_attribute(key, value) }
     end
 
     # Returns a unique serial number for the object under construction.
