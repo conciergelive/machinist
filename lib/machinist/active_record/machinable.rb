@@ -12,11 +12,14 @@ module Machinist::ActiveRecord
 
     # Make and save an object.
     def make!(*args)
-      old_save_value = Thread.current["machinist_hard_save"]
-      Thread.current["machinist_hard_save"] = true
-      r = super(*process_make_args(*args))
-      Thread.current["machinist_hard_save"] = old_save_value
-      r
+      begin
+        old_save_value = Thread.current["machinist_hard_save"]
+        Thread.current["machinist_hard_save"] = true
+        r = super(*process_make_args(*args))        
+      ensure
+        Thread.current["machinist_hard_save"] = old_save_value
+      end
+      r        
     end
 
     private

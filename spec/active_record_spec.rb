@@ -34,6 +34,18 @@ describe Machinist::ActiveRecord do
   end
 
   context "associations support" do
+    xit "assigns it to the object of that association" do 
+      User.blueprint do 
+        username { "James" }
+      end
+      Post.blueprint do 
+        author
+      end
+      user = User.make!(:name => "James' awesome patch")
+      post = Post.make!
+      post.author.should == user
+    end
+
     it "handles belongs_to associations" do
       User.blueprint do
         username { "user_#{sn}" }
