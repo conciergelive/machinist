@@ -14,7 +14,9 @@ module Machinist
 
       @object              = @klass.new
       attributes = attributes.clone.symbolize_keys!
-      attributes.select { |k,v| klass.priority_attribute?(k) }.each { |k,v| assign_attribute(k, attributes.delete(k)) }
+      if klass.respond_to?(:priority_attribute?)
+        attributes.select { |k,v| klass.priority_attribute?(k) }.each { |k,v| assign_attribute(k, attributes.delete(k)) }
+      end
       attributes.each { |k, v| assign_attribute(k, v) }
     end
 
